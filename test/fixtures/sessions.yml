@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time_from: 2018-07-06 15:39:11
+  time_until: 2018-07-06 15:39:11
+  childminder_id: 1
+  number_of_children: 1
+  cost_per_hour: 1
+
+two:
+  time_from: 2018-07-06 15:39:11
+  time_until: 2018-07-06 15:39:11
+  childminder_id: 1
+  number_of_children: 1
+  cost_per_hour: 1
