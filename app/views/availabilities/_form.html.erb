@@ -1,0 +1,11 @@
+<%= f.label "From" %>
+<%= f.label :days%>
+<%= datetime_field("availability", "time_from", min: Date.today)%>
+<%= f.label "Until" %>
+<%= datetime_field("availability", "time_until", min: Date.today)%>
+<%= f.label :number_of_children %>
+<%= f.number_field :number_of_children %>
+<%= f.label :cost_per_hour %>
+<%= f.text_field :cost_per_hour %>
+<%= f.collection_select :school_id, School.all, :id, :name %>
+<%= f.submit %>

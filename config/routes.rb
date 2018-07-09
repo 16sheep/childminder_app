@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   end
   resources :schools do
     get '/users/:user_id', to: 'users#user_availabilities'
+    get '/users/:user_id', to: 'users#user_bookings'
   end
 end

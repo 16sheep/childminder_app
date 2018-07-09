@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :minders, through: :parent_contracts, source: :child_minder
   has_many :children
   has_many :postings
-  has_many :schools :thorugh, :postings
+  has_many :schools, through: :postings
 
   accepts_nested_attributes_for :children, reject_if: proc { |attributes| attributes['name'].blank? }
 

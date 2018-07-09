@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2018_07_06_144434) do
   create_table "availabilities", force: :cascade do |t|
     t.datetime "time_from"
     t.datetime "time_until"
-    t.integer "user_id"
+    t.integer "posting_id"
     t.integer "number_of_children"
     t.integer "cost_per_hour"
     t.datetime "created_at", null: false
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2018_07_06_144434) do
     t.string "name"
     t.integer "age"
     t.integer "user_id"
+    t.integer "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

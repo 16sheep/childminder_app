@@ -9,6 +9,6 @@
 
 </ul>
 
-<h2>Your Bookings</h2>
+<h2><%= link_to "Your Bookings", user_session_bookings_path(@user) %></h2>
 
-<h2>Your Sessions</h2>
+<h2><%= link_to "Your Availabilities", user_availabilities_path(@user) %></h2>
