@@ -1,6 +1,6 @@
-class CreateSessions < ActiveRecord::Migration[5.2]
+class CreateAvailabilities < ActiveRecord::Migration[5.2]
   def change
-    create_table :sessions do |t|
+    create_table :availabilities do |t|
       t.datetime :time_from
       t.datetime :time_until
       t.integer :user_id

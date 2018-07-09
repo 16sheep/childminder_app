@@ -3,7 +3,7 @@
 <h2>Your children</h2>
 <ul>
   <% @children.each do |child| %>
-    <li><h3><%=link_to child.name, child %></h3></li>
+    <li><h3><%=link_to child.name, [@user,child] %></h3></li>
     <li><p><%= child.age %></p></li>
   <% end  %>
 

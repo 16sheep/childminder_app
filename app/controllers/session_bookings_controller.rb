@@ -1,0 +1,2 @@
+class SessionBooking < ApplicationController
+end

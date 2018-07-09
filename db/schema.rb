@@ -12,6 +12,16 @@
 
 ActiveRecord::Schema.define(version: 2018_07_06_144434) do
 
+  create_table "availabilities", force: :cascade do |t|
+    t.datetime "time_from"
+    t.datetime "time_until"
+    t.integer "user_id"
+    t.integer "number_of_children"
+    t.integer "cost_per_hour"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "children", force: :cascade do |t|
     t.string "name"
     t.integer "age"
@@ -45,25 +55,14 @@ ActiveRecord::Schema.define(version: 2018_07_06_144434) do
 
   create_table "session_bookings", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "session_id"
+    t.integer "availability_id"
     t.integer "child_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sessions", force: :cascade do |t|
-    t.datetime "time_from"
-    t.datetime "time_until"
-    t.integer "user_id"
-    t.integer "number_of_children"
-    t.integer "cost_per_hour"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "username"
     t.string "password_digest"
     t.string "email"
     t.datetime "created_at", null: false
