@@ -1,0 +1,14 @@
+<h1><%= @user.name %></h1>
+
+<h2>Your children</h2>
+<ul>
+  <% @children.each do |child| %>
+    <li><h3><%=link_to child.name, child %></h3></li>
+    <li><p><%= child.age %></p></li>
+  <% end  %>
+
+</ul>
+
+<h2>Your Bookings</h2>
+
+<h2>Your Sessions</h2>
