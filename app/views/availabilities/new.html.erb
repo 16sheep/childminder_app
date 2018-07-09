@@ -1,0 +1,12 @@
+<h1>New Availability</h1>
+<%=form_for [:user, @availability] do |f| %>
+  <%= f.label "From" %>
+  <%= f.label :days%>
+  <%= datetime_field("availability", "time_from", min: Date.today)%>
+  <%= f.label "Until" %>
+  <%= datetime_field("availability", "time_until", min: Date.today)%>
+  <%= f.label :number_of_children %>
+  <%= f.number_field :number_of_children %>
+  <%= f.label :cost_per_hour %>
+  <%= f.text_field :cost_per_hour %>
+<% end %>

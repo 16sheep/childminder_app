@@ -1,0 +1,6 @@
+<h1><%= @school.name %></h1>
+  <ul>
+    <%@school.users.each do |childminder|%>
+      <li><%= link_to childminder.name, [@school, childminder]  %></li>
+    <% end %>
+  </ul>

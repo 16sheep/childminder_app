@@ -15,6 +15,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def user_availabilities
+    @user = User.find(params[:user_id])
+
+  end
+
   def create
     @user = User.create(user_params)
     @user.password = (params[:password])

@@ -5,4 +5,7 @@ Rails.application.routes.draw do
     resources :availabilities
     resources :session_bookings
   end
+  resources :schools do
+    get '/users/:user_id', to: 'users#user_availabilities'
+  end
 end
