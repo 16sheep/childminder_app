@@ -11,7 +11,7 @@ class SessionBookingsController < ApplicationController
   def new
     @booking = SessionBooking.new
   end
-
+      
   def create
     params[:session_bookings][:children_ids].each do |child_id|
       if !child_id.empty?

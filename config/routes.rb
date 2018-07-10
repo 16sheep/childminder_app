@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   post '/logout', to: 'sessions#destroy'
 
+  get '/signup', to: 'users#new', as:'signup'
+  
   resources :users do
     resources :children
     resources :availabilities 
@@ -14,6 +16,6 @@ Rails.application.routes.draw do
 
   resources :schools do
     get '/users/:user_id', to: 'users#user_availabilities'
-    get '/users/:user_id', to: 'users#user_bookings'
+    get '/users/:user_id/bookings', to: 'users#user_bookings'
   end
 end
