@@ -15,7 +15,7 @@ class SessionBookingsController < ApplicationController
   def create
     params[:session_bookings][:children_ids].each do |child_id|
       if !child_id.empty?
-        SessionBooking.create(user_id: User.first.id, availability_id: params[:availability_id], child_id: child_id)
+        SessionBooking.create(user_id: current_user.id, availability_id: params[:availability_id], child_id: child_id)
       end
     end
     redirect_to user_session_bookings_path
