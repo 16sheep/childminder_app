@@ -4,8 +4,8 @@
         <a href="#"> Add Booking </a>
         <a href="/login"> Login </a>
         <a href="/signup"> Register </a>
-        <%if(@user_logged_in) %>
-            <a href="/<%=@user.id%>/availabilities"> Create Availabilty </a>
+        <%if(@current_user) %>
+            <a href="/<%=@current_user.id%>/availabilities"> Create Availabilty </a>
             <a href="#"> View Profile </a>
             <a href="#"> Logout </a>
         <% end %>
