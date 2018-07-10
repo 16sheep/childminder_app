@@ -13,6 +13,7 @@ class SessionBookingsController < ApplicationController
   end
 
   def create(session_booking_params)
+      
   end
 
   def destroy

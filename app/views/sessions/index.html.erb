@@ -1,5 +1,30 @@
+<div class="container">
 
-<h1> This is the home page</h1>
+    <h1> This is the home page</h1>
+    <div class="card text-center">
+        <div class="card-header">
+            Book A Child Minder
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Book A Child Minder</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <div class="card-content">
+                <%= form_tag '/bookings', method: :post, class:"form-group" do %>
+                <div class="col-sm">
+                    <%= label_tag "School" %>
+                    <%= text_field_tag "school" %>
+                </div>
+                <div class="col-sm">
+                    <%= label_tag "Date / Time" %>
+                    <%= text_field_tag "datetime" %>
+                </div>
+                <%= submit_tag "Confirm Booking", class:"btn btn-primary" %>
+                <% end %>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
 
+        </div>
+    </div>
 
-    <%= @user %>
+</div>

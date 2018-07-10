@@ -1,26 +1,38 @@
-<h1>Create New User (Parent / Childminder)</h1>
-<%= form_for @user do |f| %>
-<div>
-  <%= f.label :name %>
-  <%= f.text_field :name %> <br>
-  <%= f.label :email %>
-  <%= f.text_field :email %> <br>
-  <%= f.label :password %>
-  <%= f.password_field :password %> <br>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %> <br>
-</div> <br>
+<div class="container text-center" style="width: 700px;">
+        <h1 class="h3 mb-3 font-weight-normal">Create New User (Parent / Childminder)</h1> <br>
+        <%= form_for @user, class: "form-group" do |f| %>
+            <div class="row">
+                <%= f.label :name, class:'col-sm h4 mb-1 font-weight-light' %>
+                <%= f.text_field :name, class:'col-sm form-control' %><br>
+            </div>
+            <div class="row">
+                <%= f.label :email, class:'col-sm h4 mb-1 font-weight-light' %>
+                <%= f.text_field :email, class:'col-sm form-control' %> <br>
+            </div>
+            <div class="row">
+              <%= f.label :password, class:'col-sm h4 mb-1 font-weight-light' %>
+              <%= f.password_field :password, class:'col-sm form-control' %> <br>
+            </div>
+            <div class="row">
+                <%= f.label :password_confirmation, class:'col-sm h4 mb-1 font-weight-light' %>
+                <%= f.password_field :password_confirmation, class:'col-sm form-control' %> <br>
+            </div> <br>
 
- <div id="add-children">
-   <h3>Children</h3>
-     <%= f.fields_for(:children) do |ff| %> <hr>
-       <%= ff.label :name %>
-       <%= ff.text_field :name %> <br>
-       <%= ff.label :age %>
-       <%= ff.number_field :age %> <br> <hr>
-     <% end %> <br>
-
- </div>
- <%= f.submit %>
-<% end %>
-<%= link_to "Cancel", '/' %>
+           <h3 class="h3 mb-3 font-weight-normal">Children</h3>
+             <%= f.fields_for(:children) do |ff| %> <br>
+               <div class="row">
+                   <%= ff.label :name, class:'col-sm h4 mb-1 font-weight-light' %>
+                   <%= ff.text_field :name, class:'col-sm form-control' %> <br>
+               </div>
+               <div class="row">
+               <%= ff.label :age, class:'col-sm h4 mb-1 font-weight-light'%>
+               <%= ff.number_field :age, class:'col-sm form-control' %> <br>
+               </div>
+             <% end %>
+         <br>
+         <div class="row">
+             <%= f.submit class:"btn btn-lg btn-dark btn-block"  %>
+             <%= link_to "Cancel", '/', class:"btn btn-lg btn-outline-dark btn-block" %>
+         </div>
+        <% end %>
+</div>
