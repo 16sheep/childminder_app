@@ -20,6 +20,6 @@ class ApplicationController < ActionController::Base
     end
 
     def user_logged_in
-        return !!session[:user_id]
+        return @user_logged_in = !!session[:user_id]
     end
 end

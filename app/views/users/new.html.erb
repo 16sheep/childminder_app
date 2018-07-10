@@ -1,6 +1,6 @@
 <div class="container text-center" style="width: 700px;">
         <h1 class="h3 mb-3 font-weight-normal">Create New User (Parent / Childminder)</h1> <br>
-        <%= form_for @user, class: "form-group" do |f| %>
+        <%= form_for :user, class: "form-group" do |f| %>
             <div class="row">
                 <%= f.label :name, class:'col-sm h4 mb-1 font-weight-light' %>
                 <%= f.text_field :name, class:'col-sm form-control' %><br>
@@ -10,7 +10,7 @@
                 <%= f.text_field :email, class:'col-sm form-control' %> <br>
             </div>
             <div class="row">
-              <%= f.label :password, class:'col-sm h4 mb-1 font-weight-light' %>
+              <%= f.label "Password", class:'col-sm h4 mb-1 font-weight-light' %>
               <%= f.password_field :password, class:'col-sm form-control' %> <br>
             </div>
             <div class="row">
