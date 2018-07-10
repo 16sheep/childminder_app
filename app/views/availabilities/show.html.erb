@@ -4,7 +4,8 @@
 <%= @availability.time_until %><br>
 <%= @availability.number_of_children %><br>
 
-<%= form_for @booking do |f|%>
-  <%= f.collection_check_boxes (:number_of_children, @current_user.children, :id, :name)  %>
-  <%= f.submit "Book" %>
+<%= form_tag(user_session_bookings_path) do %>
+  <%= collection_check_boxes(:session_bookings, :children_ids, User.first.children, :id, :name) %>
+  <input type="hidden" value="<%= @availability.id %>" name="availability_id"/>
+  <%= submit_tag 'Book' %>
 <% end %>
