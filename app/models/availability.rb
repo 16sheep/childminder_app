@@ -17,5 +17,4 @@ class Availability < ApplicationRecord
     @user_id
   end
 
-
 end

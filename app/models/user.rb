@@ -27,4 +27,8 @@ class User < ApplicationRecord
      BCrypt::Engine
   end
 
+  def self.user_from_session
+    User.find(session[:user_id])
+  end
+
 end
