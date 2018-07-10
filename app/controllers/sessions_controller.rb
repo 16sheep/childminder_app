@@ -13,14 +13,17 @@ class SessionsController < ApplicationController
     def create
         #where session
         @user = User.find_by(email: params[:email])
-        return head(:forbidden) unless @user.authenticate(params[:password])
-        session[:user_id] = @user.id
-        redirect_to root_path
+        if @user && @user.authenticate(params[:password])
+          session[:user_id] = @user.id
+          redirect_to root_path
+        else
+          redirect_to "/login"
+        end
     end
 
     #logout
     def destroy
-        session[:user_id]
+        session[:user_id] = nil
         redirect_to root_path
     end
 

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/', to: 'sessions#index', as: 'root'
   get '/login', to: 'sessions#new', as:'login'
   post '/', to: 'sessions#create'
-  post '/logout', to: 'sessions#destroy'
+  get '/logout', to: 'sessions#destroy'
 
   get '/signup', to: 'users#new', as:'signup'
   post '/signup', to: 'users#create'
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :children
-    resources :availabilities 
+    resources :availabilities
     resources :session_bookings
   end
 
