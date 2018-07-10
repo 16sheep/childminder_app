@@ -1,5 +1,5 @@
 class AvailabilitiesController < ApplicationController
-  before_action :set_availability, only: [:show, :update, :edit, :delete]
+  before_action :set_availability, only: [:show, :update, :edit, :delete, :booking]
 
 
   def show

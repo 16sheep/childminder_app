@@ -25,4 +25,8 @@ class User < ApplicationRecord
     return nil unless (salt + hashed) == self.password_digest
   end
 
+  def self.user_from_session
+    User.find(session[:user_id])
+  end
+
 end

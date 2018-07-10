@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :children
-    resources :availabilities
+    resources :availabilities 
     resources :session_bookings
   end
 

@@ -11,9 +11,14 @@ class SessionBookingsController < ApplicationController
   def new
     @booking = SessionBooking.new
   end
-
-  def create(session_booking_params)
       
+  def create
+    params[:session_bookings][:children_ids].each do |child_id|
+      if !child_id.empty?
+        SessionBooking.create(user_id: User.first.id, availability_id: params[:availability_id], child_id: child_id)
+      end
+    end
+    redirect_to user_session_bookings_path
   end
 
   def destroy
@@ -27,7 +32,7 @@ class SessionBookingsController < ApplicationController
   end
 
   def session_booking_params
-    params.require(:session_booking).permit(:child_id, :user_id, :availability_id)
+    params.require(:session_booking).permit(:children_ids => [])
   end
 
 end
