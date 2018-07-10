@@ -1,8 +1,13 @@
 class AvailabilitiesController < ApplicationController
-  before_action :set_availability, only: [:show, :update, :edit, :delete]
+  before_action :set_availability, only: [:show, :update, :edit, :delete, :booking]
 
 
   def show
+    @booking = Booking.new
+  end
+
+  def booking
+    @booking = Booking.create(user_id: current_user.id, availability_id: @availability.id, child_id: children_ids[])
   end
 
   def edit

@@ -1,0 +1,10 @@
+<h1> This availablity</h1>
+
+<%= @availability.time_from %><br>
+<%= @availability.time_until %><br>
+<%= @availability.number_of_children %><br>
+
+<%= form_for @booking do |f|%>
+  <%= f.collection_check_boxes (:number_of_children, @current_user.children, :id, :name)  %>
+  <%= f.submit "Book" %>
+<% end %>
