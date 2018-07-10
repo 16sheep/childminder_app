@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-    @user.password = (params[:password])
+    @user.password = params[:user][:password]
     @user.save
     redirect_to @user
   end
