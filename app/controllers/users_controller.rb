@@ -17,7 +17,6 @@ class UsersController < ApplicationController
 
   def user_availabilities
     @user = User.find(params[:user_id])
-
   end
 
   def create
