@@ -3,11 +3,6 @@ class AvailabilitiesController < ApplicationController
 
 
   def show
-    @booking = Booking.new
-  end
-
-  def booking
-    @booking = Booking.create(user_id: current_user.id, availability_id: @availability.id, child_id: children_ids[])
   end
 
   def edit

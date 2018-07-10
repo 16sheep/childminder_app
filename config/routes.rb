@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   post '/logout', to: 'sessions#destroy'
 
   resources :users do
-    post '/booking', to 'availabilities#booking'
     resources :children
-    resources :availabilities
+    resources :availabilities 
     resources :session_bookings
   end
 
