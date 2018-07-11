@@ -5,7 +5,9 @@
 <%= @availability.number_of_children %><br>
 
 <%= form_tag(user_session_bookings_path) do %>
-  <%= collection_check_boxes(:session_bookings, :children_ids, @current_user.children, :id, :name) %>
+  <%= collection_check_boxes(:session_bookings, :children_ids, current_user.children, :id, :name) %>
   <input type="hidden" value="<%= @availability.id %>" name="availability_id"/>
   <%= submit_tag 'Book' %>
 <% end %>
+
+<%= link_to "Go Back", "/" %>
