@@ -7,12 +7,7 @@
         <% if(!user_logged_in) %>
           <li class="nav-item">
             <span class="nav-link">
-              <%= link_to "Add booking", "/login" %>
-            </span>
-          </li>
-          <li class="nav-item">
-            <span class="nav-link">
-              <%= link_to "Create Availability", "/login" %>
+              <%= link_to "Availabilities", "/login" %>
             </span>
           </li>
           <li class="nav-item">
@@ -33,7 +28,7 @@
 
         <li class="nav-item">
           <span class="nav-link">
-            <%= link_to "Add booking", "/users/#{current_user.id}/session_bookings" %>
+            <%= link_to "Bookings", "/users/#{current_user.id}/session_bookings" %>
           </span>
         </li>
         <li class="nav-item">
@@ -46,7 +41,6 @@
             <%= link_to "View Profile", "/users/#{current_user.id}" %>
           </span>
         </li>
-
         <li class="nav-item">
           <span class="nav-link">
             <%= link_to "Logout", "/logout" %>
