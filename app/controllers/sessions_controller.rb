@@ -8,6 +8,9 @@ class SessionsController < ApplicationController
 
     def new
       # renders login form from views/sessions/new
+      if(user_logged_in)
+        redirect_to "/users/#{current_user.id}"
+      end
     end
 
     def create
@@ -34,10 +37,11 @@ class SessionsController < ApplicationController
       school_id = params[:school_id]
       date_array = params[:date].values.map {|v| v.to_i}
       date = Date.new(date_array[2], date_array[1], date_array[0])
+
       @search_date = date.strftime("%A, %d-%B-%Y")
+
       @availabilities = Availability.all.select do |availability|
           (availability.time_from.to_date >= date) && (availability.time_until <= (date + 1))
       end
-
     end
 end

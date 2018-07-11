@@ -5,12 +5,11 @@
 <p>Until<%= @availability.time_until %></p>
 <p>Number of children<%= @availability.number_of_children %></p>
 
+<ul>
+  <span> SHOW THE CHILDREN THE CHILD MINDER HAS FOR THIS SECTION</span>
+</ul>
 
-<%= form_tag(user_session_bookings_path) do %>
-  <%= collection_check_boxes(:session_bookings, :children_ids, current_user.children, :id, :name) %>
-  <input type="hidden" value="<%= @availability.id %>" name="availability_id"/>
-  <%= submit_tag 'Book' %>
-<% end %>
+
 <% if current_user.id == @availability.user.id %>
   <%= link_to "Update Availability", edit_user_availability_path(current_user.id) %><br>
 <% end %>

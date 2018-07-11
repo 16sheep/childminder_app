@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :show, :destroy]
-  before_action :authorize_user, only: [:show, :edit, :update, :delete]
+  before_action :require_login, only: [:show, :edit, :update, :delete]
 
   def show
     @children = @user.children

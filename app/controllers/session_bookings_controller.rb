@@ -1,28 +1,30 @@
 class SessionBookingsController < ApplicationController
   before_action :set_booking, only: [:show, :destroy]
-  before_action :set_user, only: [:index, :show, :new, :create, :destroy]
   before_action :require_login, only: [:index, :show, :new, :create, :destroy]
 
   def index
-    @bookings = SessionBooking.all #TODO grab the users sessionbookings
+    @bookings = SessionBooking.all.select do |session_booking|
+      session_booking.user_id == current_user.id
+    end #TODO grab the users sessionbookings
   end
 
   def show
-    if !set_booking
-      redirect_to "/"
-    end
+
   end
 
   def new
-    @booking = SessionBooking.new
+    redirect_to '/'
   end
 
   def create
+
     params[:session_bookings][:children_ids].each do |child_id|
       if !child_id.empty?
-        SessionBooking.create(user_id: current_user.id, availability_id: params[:availability_id], child_id: child_id)
+        s = SessionBooking.create(user_id: current_user.id, availability_id: params[:availability_id], child_id: child_id)
+        byebug
       end
     end
+
     redirect_to user_session_bookings_path
   end
 
@@ -34,17 +36,13 @@ class SessionBookingsController < ApplicationController
 
   def set_booking
     bookings = SessionBooking.all.select do |b|
-      b.user_id == params[:user_id].to_i
+      b.user_id == current_user.id
     end
     if bookings.include?(SessionBooking.find(params[:id]))
       @booking = SessionBooking.find(params[:id])
     else
       nil
     end
-  end
-
-  def set_user
-    @user = @booking.user
   end
 
   def session_booking_params
