@@ -1,9 +1,0 @@
-<h1>Create hero</h1>
-
-<% if(flash[:errors] && flash[:errors].length > 0) %>
-    <%= render "errors/errors" %>
-<% end  %>
-
-<%= render "form" %>
-
-<%= link_to "Go Back To All", heroines_path %>
