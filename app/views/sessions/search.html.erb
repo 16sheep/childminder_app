@@ -1,0 +1,11 @@
+<div class="container">
+
+<h1>Available Times for <%= @search_date %></h1>
+
+<hr>
+<ul>
+  <%@availabilities.each do |available_date| %>
+      <li><%= available_date.time_from.strftime("%H:%M %p") %> TO <%= available_date.time_until.strftime("%H:%M %p") %> <button type="button" name="button">Book</button> </li>
+    <% end %>
+</ul>
+</div>
