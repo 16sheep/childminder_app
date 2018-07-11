@@ -1,11 +1,11 @@
 class ChildrenController < ApplicationController
   before_action :set_child, only: [:show, :edit, :destroy, :update]
+  #before_action :authorize_user, only: [:show, :edit, :destroy, :update, :new, :create]
 
   def show
   end
 
   def edit
-
   end
 
   def update
@@ -19,8 +19,8 @@ class ChildrenController < ApplicationController
   end
 
   def create
-    child = Child.new(child_params)
-    child.user_id = session[:user_id]
+    child = Child.create(child_params)
+    child.user = current_user
     child.save
     redirect_to "/users/#{child.user_id}"
   end
