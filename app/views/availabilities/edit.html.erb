@@ -1,3 +1,6 @@
 <h1>Update Availability</h1>
 
 <%= render "form" %>
+<%= form_tag user_availability_path(@availability.user.id), method: "delete" do %>
+  <%= submit_tag "Delete Availability" %>
+<% end %>
