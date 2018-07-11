@@ -2,8 +2,17 @@ class AvailabilitiesController < ApplicationController
   before_action :set_availability, only: [ :show, :update, :edit, :destroy, :booking]
   before_action :authorize_user_objects, only: [:update, :edit, :delete, :booking, :create, :new]
 
+  def index
+    @available_dates = Availability.all.select do |availability|
+      if availability.user != nil
+        availability.user.id = params[:user_id].to_i
+      end
+    end
+  end
+
   def show
     if @availability == nil
+      flash[:notice] = "The childminder and availability don't match"
       redirect_to '/'
     end
   end

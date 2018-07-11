@@ -3,16 +3,20 @@
 <p>Contact: <%= @availability.user.email %></p>
 <p>From<%= @availability.time_from %></p>
 <p>Until<%= @availability.time_until %></p>
-<p>Number of children<%= @availability.number_of_children %></p>
+<p>Number of children <%= @availability.number_of_children %></p>
 
-
-<%= form_tag(user_session_bookings_path) do %>
-  <%= collection_check_boxes(:session_bookings, :children_ids, current_user.children, :id, :name) %>
-  <input type="hidden" value="<%= @availability.id %>" name="availability_id"/>
-  <%= submit_tag 'Book' %>
+<%if @availability.number_of_children < 1 %>
+  <p>Fully booked</p>
+<% else %>
+  <%= form_tag(user_session_bookings_path) do %>
+    <%= collection_check_boxes(:session_bookings, :children_ids, current_user.children, :id, :name) %>
+    <input type="hidden" value="<%= @availability.id %>" name="availability_id"/>
+    <%= submit_tag 'Book' %>
+  <% end %>
 <% end %>
 <% if current_user.id == @availability.user.id %>
   <%= link_to "Update Availability", edit_user_availability_path(current_user.id) %><br>
 <% end %>
+<%= link_to "All availabilities for #{@availability.user.name}", user_availabilities_path(@availability.user.id) %><br>
 
 <%= link_to "Go Back", "/" %>

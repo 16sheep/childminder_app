@@ -4,6 +4,7 @@ class ChildrenController < ApplicationController
 
   def show
     if set_child == nil
+      flash[:notice] = "The child and parent don't match"
       redirect_to '/'
     end
   end

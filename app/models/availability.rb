@@ -17,6 +17,14 @@ class Availability < ApplicationRecord
     @user_id
   end
 
+  def start_time
+    time_from
+  end
+
+  def end_time
+    time_until
+  end
+
   def user
     if(self.posting && self.posting.user_id)
       user = User.find(self.posting.user_id)
