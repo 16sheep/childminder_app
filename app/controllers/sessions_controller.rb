@@ -3,14 +3,13 @@ class SessionsController < ApplicationController
     def index
       #check if user is logged in and assign user
       #if not then have user nil
-
       @schools = School.all
     end
 
     def new
       # renders login form from views/sessions/new
     end
-    
+
     def create
       #Gets params from the login form, checks if that user exists,
       #authenticates the existing user and assings
@@ -35,11 +34,9 @@ class SessionsController < ApplicationController
       school_id = params[:school_id]
       date_array = params[:date].values.map {|v| v.to_i}
       date = Date.new(date_array[2], date_array[1], date_array[0])
-
       @search_date = date.strftime("%A, %d-%B-%Y")
-
       @availabilities = Availability.all.select do |availability|
-          Availability.where(time_from: (date..(date + 1)))
+          (availability.time_from.to_date >= date) && (availability.time_until <= (date + 1))
       end
 
     end
