@@ -4,6 +4,13 @@ class SessionBookingsController < ApplicationController
 
   def index
     @bookings = SessionBooking.all
+    @booking_times = Availability.all.select do |availability|
+      if availability.session_bookings
+        availability.session_bookings.select do |booking|
+          booking.child.user == current_user
+        end
+      end
+    end
   end
 
   def show
