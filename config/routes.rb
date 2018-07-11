@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   #generates new user and adds to the database
   post '/signup', to: 'users#create'
 
+  get '/search', to: 'sessions#search', as: 'search'
 
   resources :users do
     resources :children

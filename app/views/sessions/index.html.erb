@@ -9,16 +9,17 @@
             <h5 class="card-title">Book A Child Minder</h5>
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
             <div class="card-content">
-                <%= form_tag '/bookings', method: :post, class:"form-group" do %>
+                <%= form_tag '/search', method: :get, class:"form-group" do %>
                 <div class="col-sm">
-                    <%= label_tag "School" %>
-                    <%= text_field_tag "school" %>
+                    <%= label_tag "school" %>
+                    <%= collection_select(:school_id, :school_id, @schools, :id, :name) %>
                 </div>
+
                 <div class="col-sm">
-                    <%= label_tag "Date / Time" %>
-                    <%= text_field_tag "datetime" %>
+                    <%= label_tag "date" %>
+                    <%= date_select("date", "preferred_date", order: [:day, :month, :year], :discard_year => true, :default => Date.today) %>
                 </div>
-                <%= submit_tag "Confirm Booking", class:"btn btn-primary" %>
+                <%= submit_tag "Search Avalabilities", class:"btn btn-primary" %>
                 <% end %>
             </div>
         </div>

@@ -36,5 +36,7 @@ class AvailabilitiesController < ApplicationController
 
   def set_availability
     @availability = Availability.find(params[:id])
+    #TODO
+    #Change to check if the availability id belongs to that user otherwise redirect back to all availabilities
   end
 end
