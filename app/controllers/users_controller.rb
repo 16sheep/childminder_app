@@ -2,16 +2,23 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :show, :destroy]
 
   def show
-    @children = @user.children
+    if session[:user_id] == @user.id
+      @children = @user.children
+    else
+      flash[:notice] = "You are not authorized to view this page"
+      redirect_to '/'
+    end
   end
 
   def edit
+
   end
 
   def new
-    @user = User.new
-    3.times do
-      children = @user.children.build
+    if !session[:user_id]
+      @user = User.new
+    else
+      redirect_to '/'
     end
   end
 
@@ -21,12 +28,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-    @user.password = params[:user][:password]
     @user.save
-    redirect_to @user
+    redirect_to '/login'
   end
 
   def update
+    @user.update(user_params)
+    @user.save
+    redirect_to @user
   end
 
   def destroy
@@ -38,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :username, :email, :children_attributes => [:name, :age], :session_ids => [], :session_booking_ids => [])
+    params.require(:user).permit(:name, :email, :password)
   end
 
 end

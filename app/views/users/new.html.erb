@@ -17,18 +17,6 @@
                 <%= f.label :password_confirmation, class:'col-sm h4 mb-1 font-weight-light' %>
                 <%= f.password_field :password_confirmation, class:'col-sm form-control' %> <br>
             </div> <br>
-
-           <h3 class="h3 mb-3 font-weight-normal">Children</h3>
-             <%= f.fields_for(:children) do |ff| %> <br>
-               <div class="row">
-                   <%= ff.label :name, class:'col-sm h4 mb-1 font-weight-light' %>
-                   <%= ff.text_field :name, class:'col-sm form-control' %> <br>
-               </div>
-               <div class="row">
-               <%= ff.label :age, class:'col-sm h4 mb-1 font-weight-light'%>
-               <%= ff.number_field :age, class:'col-sm form-control' %> <br>
-               </div>
-             <% end %>
          <br>
          <div class="row">
              <%= f.submit class:"btn btn-lg btn-dark btn-block"  %>

@@ -1,63 +1,64 @@
 <div class="container">
-  <nav class="site-header sticky-top py-1 m-2 mb-3 bg-white border-bottom box-shadow">
-
+  <nav class="navbar navbar-expand-sm sticky-top py-1 m-2 mb-3 border-bottom box-shadow">
     <a href="/">ChildMinders 'R' Us</a>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="ml-auto">
+
+      <ul class="navbar-nav ml-auto">
         <% if(!user_logged_in) %>
-          <li>
+          <li class="nav-item">
+            <span class="nav-link">
+              <%= link_to "Add booking", "/login" %>
+            </span>
+          </li>
+          <li class="nav-item">
+            <span class="nav-link">
+              <%= link_to "Create Availability", "/login" %>
+            </span>
+          </li>
+          <li class="nav-item">
+            <span class="nav-link">
+              <%= link_to "Login", "/login" %>
+            </span>
+          </li>
+
+          <li class="nav-item">
             <span class="nav-link">
               <%= link_to "Register", "/signup" %>
             </span>
           </li>
 
-          <li>
-            <span class="nav-link">
-              <%= link_to "Login", "/login" %>
-            </span>
-          </li>
-          
-          <li>
-            <span class="nav-link">
-              <%= link_to "Add booking", "/login" %>
-            </span>
-          </li>
-          <li>
-            <span class="nav-link">
-              <%= link_to "Create Availability", "/login" %>
-            </span>
-          </li>
+        </div>
 
-        <% else %>
-          <li>
-            <span class="nav-link">
-              <%= link_to "Add booking", "/" %>
-            </span>
-          </li>
-          <li>
-            <span class="nav-link">
-              <%= link_to "Create Availability", "/users/#{current_user.id}/availabilities/new" %>
-            </span>
-          </li>
+      <% else %>
 
-          <li>
-            <span class="nav-link">
-              <%= link_to "View Profile", "/users/#{current_user.id}" %>
-            </span>
-          </li>
+        <li class="nav-item">
+          <span class="nav-link">
+            <%= link_to "Add booking", "/users/#{current_user.id}/session_bookings" %>
+          </span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link">
+            <%= link_to "Create Availability", "/users/#{current_user.id}/availabilities/new" %>
+          </span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link">
+            <%= link_to "View Profile", "/users/#{current_user.id}" %>
+          </span>
+        </li>
 
-          <li>
-            <span class="nav-link">
-              <%= link_to "Logout", "/logout" %>
-            </span>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+        <li class="nav-item">
+          <span class="nav-link">
+            <%= link_to "Logout", "/logout" %>
+          </span>
+        </li>
 
-    <!-- <div class="container flex-column flex-md-row justify-content-between"></div> -->
-    <%= %>
+      <% end %>
+    </ul>
   </div>
+
+  <!-- <div class="container flex-column flex-md-row justify-content-between"></div> -->
+  <%= %>
+</div>
 </nav>
 </div>
