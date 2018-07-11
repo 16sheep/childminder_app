@@ -4,12 +4,7 @@
   <%=f.label :age %>
   <%=f.number_field :age %>
   <%=f.label "School" %>
-  <%= f.text_field :school_id, list: "school_id" %>
-  <datalist id="school_id">
-    <% School.all.each do |school| %>
-      <option value="<%= school.name %>"></option>
-    <% end %>
-  </datalist>
+  <%= f.collection_select :school_id, School.all, :id, :name %>
   <%=f.submit %>
 <% end %>
 <%= link_to "Cancel", "/users/#{current_user.id}" %>

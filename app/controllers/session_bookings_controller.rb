@@ -1,6 +1,6 @@
 class SessionBookingsController < ApplicationController
   before_action :set_booking, only: [:show, :destroy]
-
+  #before_action :authorize_user_bookings, :only[:index, :show, :new, :create, :destroy]
   def index
     @bookings = SessionBooking.all
   end
@@ -11,7 +11,7 @@ class SessionBookingsController < ApplicationController
   def new
     @booking = SessionBooking.new
   end
-      
+
   def create
     params[:session_bookings][:children_ids].each do |child_id|
       if !child_id.empty?

@@ -17,4 +17,8 @@ class Availability < ApplicationRecord
     @user_id
   end
 
+  def user
+    User.find(self.posting.user_id)
+  end
+
 end
