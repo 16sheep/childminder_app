@@ -1,11 +1,15 @@
 class SessionBookingsController < ApplicationController
   before_action :set_booking, only: [:show, :destroy]
-  #before_action :authorize_user_bookings, :only[:index, :show, :new, :create, :destroy]
+  before_action :set_user, only: [:index, :show, :new, :create, :destroy]
+  before_action :authorize_user, :only[:index, :show, :new, :create, :destroy]
   def index
     @bookings = SessionBooking.all
   end
 
   def show
+    if !set_booking
+      redirect_to "/"
+    end
   end
 
   def new
@@ -28,7 +32,18 @@ class SessionBookingsController < ApplicationController
   private
 
   def set_booking
-    @booking = SessionBooking.find(params[:id])
+    bookings = SessionBooking.all.select do |b|
+      b.user_id == params[:user_id].to_i
+    end
+    if bookings.include?(SessionBooking.find(params[:id]))
+      @booking = SessionBooking.find(params[:id])
+    else
+      nil
+    end
+  end
+
+  def set_user
+    @user = @booking.user
   end
 
   def session_booking_params

@@ -18,7 +18,11 @@ class Availability < ApplicationRecord
   end
 
   def user
-    User.find(self.posting.user_id)
+    if(self.posting && self.posting.user_id)
+      user = User.find(self.posting.user_id)
+    else
+      nil
+    end
   end
 
 end
