@@ -3,3 +3,6 @@
 <%= @booking.time_until %>
 <%= @booking.child %>
 <%= @booking.child.school %>
+
+<%= link_to "Update Booking", edit_user_session_booking_path(current_user.id) %><br>
+<%= link_to "Go Back", "/users/#{current_user.id}/session_bookings" %>

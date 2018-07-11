@@ -4,10 +4,10 @@
 <ul>
   <% @children.each do |child| %>
     <li><h3><%=link_to child.name, [@user,child] %></h3></li>
-    <li><p><%= child.age %></p></li>
   <% end  %>
-
 </ul>
+
+<%= link_to "Add a child", new_user_child_path(@user.id) %>
 
 <h2><%= link_to "Your Bookings", user_session_bookings_path(@user) %></h2>
 

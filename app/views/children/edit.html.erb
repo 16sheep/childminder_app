@@ -1,7 +1,6 @@
-<%= form_for @child do |f| %>
-  <%=f.label :name %>
-  <%=f.text_field :name %>
-  <%=f.label :age %>
-  <%=f.text_field :age %>
-  <%= f.submit %>
-<% end  %>
+<h1>Update <%= @child.name %>'s details</h1>
+<%= render 'form' %>
+
+<%= form_tag user_child_path(@child.id), method: "delete" do %>
+  <%= submit_tag "Remove child" %>
+<% end %>
