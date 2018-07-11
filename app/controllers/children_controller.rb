@@ -11,7 +11,7 @@ class ChildrenController < ApplicationController
   def update
     @child.update(child_params)
     child.save
-    redirect_to "/users/#{child.parent_id}"  
+    redirect_to "/users/#{child.parent_id}"
   end
 
   def new
@@ -27,6 +27,7 @@ class ChildrenController < ApplicationController
 
   def destroy
     @child.destroy
+    redirect_to user_path(current_user.id)
   end
 
   private

@@ -1,6 +1,6 @@
-<h1><%= @child.name %></h1>
-<p><%= @child.age %></p>
-<p><%= @child.school %></p>
+<h1>Name : <%= @child.name %></h1>
+<p>Age : <%= @child.age %></p>
+<p>School : <%= @child.school.name %></p>
 <%= link_to "Update record", edit_user_child_path(current_user.id) %><br>
 <%= link_to "Go Back", "/users/#{current_user.id}" %>
 
