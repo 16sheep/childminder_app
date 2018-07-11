@@ -1,6 +1,14 @@
-<h1> Your Availabilities </h1>
-<h3><%=link_to "Add a new availability", new_user_availability_path %></h3>
+<h1> Availabilities </h1>
 
-<%= month_calendar do |date| %>
+<% if current_user.id == params[:id] %>
+  <h3><%=link_to "Add a new availability", new_user_availability_path %><br></h3>
+<% end %>
+
+<%= month_calendar events: @available_dates do |date, availability| %>
   <%= date %>
+  <% availability.each do |availability| %>
+    <div>
+      <%= link_to availability.user.name, user_availability_path(availability.user.id, availability.id) %>
+    </div>
+  <% end %>
 <% end %>
