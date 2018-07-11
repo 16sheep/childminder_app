@@ -1,21 +1,16 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :show, :destroy]
+  before_action :authorize_user, only: [:show, :edit, :update, :delete, :create ]
 
   def show
-    if session[:user_id] == @user.id
-      @children = @user.children
-    else
-      flash[:notice] = "You are not authorized to view this page"
-      redirect_to '/'
-    end
+    @children = @user.children
   end
 
   def edit
-
   end
 
   def new
-    if !session[:user_id]
+    if user_logged_in
       @user = User.new
     else
       redirect_to '/'
