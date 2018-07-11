@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     def new
       # renders login form from views/sessions/new
     end
-
+    
     def create
       #Gets params from the login form, checks if that user exists,
       #authenticates the existing user and assings

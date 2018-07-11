@@ -1,9 +1,10 @@
 class SessionBookingsController < ApplicationController
   before_action :set_booking, only: [:show, :destroy]
   before_action :set_user, only: [:index, :show, :new, :create, :destroy]
-  before_action :authorize_user, :only[:index, :show, :new, :create, :destroy]
+  before_action :require_login, only: [:index, :show, :new, :create, :destroy]
+
   def index
-    @bookings = SessionBooking.all
+    @bookings = SessionBooking.all #TODO grab the users sessionbookings
   end
 
   def show
