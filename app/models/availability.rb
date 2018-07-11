@@ -1,7 +1,7 @@
 class Availability < ApplicationRecord
   belongs_to :posting
-  has_many :session_bookings
-  has_many :users, through: :session_bookings
+  has_many :session_bookings, dependent: :destroy
+  has_many :users, through: :session_bookings, dependent: :destroy
 
   def school_id=(school_id)
     @school_id = school_id

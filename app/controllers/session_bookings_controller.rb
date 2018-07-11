@@ -30,7 +30,7 @@ class SessionBookingsController < ApplicationController
         if !child_id.empty?
           booking = SessionBooking.create(user_id: params[:user_id], availability_id: params[:availability_id], child_id: child_id)
           num_children -= 1
-          availability.update(:number_of_children => num_children)
+          availability.update(:number_of_children => num_children)            
         end
       end
       redirect_to user_session_bookings_path
