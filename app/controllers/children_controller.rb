@@ -1,8 +1,11 @@
 class ChildrenController < ApplicationController
   before_action :set_child, only: [:show, :edit, :destroy, :update]
-  #before_action :authorize_user, only: [:show, :edit, :destroy, :update, :new, :create]
+  before_action :authorize_user_objects, only: [:show, :edit, :destroy, :update, :new, :create]
 
   def show
+    if set_child == nil
+      redirect_to '/'
+    end
   end
 
   def edit
@@ -33,7 +36,18 @@ class ChildrenController < ApplicationController
   private
 
   def set_child
-    @child = Child.find(params[:id])
+    children = Child.all.select do |c|
+      c.user_id == params[:user_id].to_i
+    end
+    if children.include?(Child.find(params[:id]))
+      @child = Child.find(params[:id])
+    else
+      nil
+    end
+  end
+
+  def set_user
+    @user = @child.user
   end
 
   def child_params

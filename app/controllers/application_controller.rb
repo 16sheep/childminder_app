@@ -15,14 +15,14 @@ class ApplicationController < ActionController::Base
     end
 
     def authorize_user
-      if !session[:user_id] || current_user.id != @user.id
+      if !session[:user_id] || current_user.id != params[:id].to_i
         flash[:notice] = "You are not authorized to view this page"
         redirect_to "/"
       end
     end
 
-    def authorize_user_child
-      if !session[:user_id] || current_user.id != @child.user_id
+    def authorize_user_objects
+      if !session[:user_id] || current_user.id != params[:user_id].to_i
         flash[:notice] = "You are not authorized to view this page"
         redirect_to "/"
       end
@@ -41,9 +41,6 @@ class ApplicationController < ActionController::Base
         redirect_to "/"
       end
     end
-
-
-
 
     def require_login
       if(!session.include?(:user_id))

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :show, :destroy]
-  before_action :authorize_user, only: [:show, :edit, :update, :delete, :create ]
+  before_action :authorize_user, only: [:show, :edit, :update, :delete]
 
   def show
     @children = @user.children
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    if user_logged_in
+    if !user_logged_in
       @user = User.new
     else
       redirect_to '/'
