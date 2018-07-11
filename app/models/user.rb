@@ -8,10 +8,13 @@ class User < ApplicationRecord
   has_many :children
   has_many :postings
   has_many :schools, through: :postings
+  has_many :session_bookings
+  has_many :availabilities, through: :session_bookings
+
 
   accepts_nested_attributes_for :children, reject_if: proc { |attributes| attributes['name'].blank? }
 
-  
+
   # def password=(new_password)
   #   salt = BCrypt::Engine::generate_salt
   #   hashed = BCrypt::Engine::hash_secret(new_password, salt)

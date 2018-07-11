@@ -15,6 +15,9 @@ class AvailabilitiesController < ApplicationController
       flash[:notice] = "The childminder and availability don't match"
       redirect_to '/'
     end
+    if @availability.session_bookings
+      @bookings = @availability.session_bookings
+    end
   end
 
   def edit
@@ -51,13 +54,9 @@ class AvailabilitiesController < ApplicationController
   end
 
   def set_availability
-    availabilities = Availability.all.select do |a|
-      if(a.user != nil)
-        params[:user_id].to_i == a.user.id
-      end
-    end
-    if availabilities.include?(Availability.find(params[:id]))
-      @availability = Availability.find(params[:id])
+    availability = Availability.find(params[:id])
+    if(availability.user.id == current_user.id)
+      @availability = availability
     else
       nil
     end

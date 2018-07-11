@@ -1,8 +1,12 @@
 <h1> Your Booking </h1>
-<%= @booking.time_from %>
-<%= @booking.time_until %>
-<%= @booking.child %>
-<%= @booking.child.school %>
 
-<%= link_to "Update Booking", edit_user_session_booking_path(current_user.id) %><br>
+
+<%= @booking.availability %>
+
+<%= "TURN THIS INTO A FORM" %>
+
+<%= form_tag user_session_booking_path(current_user.id,@booking.id), method: "delete" do %>
+  <%= submit_tag "Cancel booking" %>
+<% end %>
+
 <%= link_to "Go Back", "/users/#{current_user.id}/session_bookings" %>

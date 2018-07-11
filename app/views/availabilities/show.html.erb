@@ -5,15 +5,15 @@
 <p>Until<%= @availability.time_until %></p>
 <p>Number of children <%= @availability.number_of_children %></p>
 
-<%if @availability.number_of_children < 1 %>
-  <p>Fully booked</p>
-<% else %>
-  <%= form_tag(user_session_bookings_path) do %>
-    <%= collection_check_boxes(:session_bookings, :children_ids, current_user.children, :id, :name) %>
-    <input type="hidden" value="<%= @availability.id %>" name="availability_id"/>
-    <%= submit_tag 'Book' %>
+<h3> Children booked for this availability</h3>
+<ol>
+  <% @bookings.each do |booking| %>
+    <h5><%= booking.child.name  %><h5>
+      <span>Parent: <%=booking.child.user.name %></span><br>
+      <span>Contact: <%=booking.child.user.email %></span>
   <% end %>
-<% end %>
+</ol>
+
 <% if current_user.id == @availability.user.id %>
   <%= link_to "Update Availability", edit_user_availability_path(current_user.id) %><br>
 <% end %>
