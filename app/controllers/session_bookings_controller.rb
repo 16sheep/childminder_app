@@ -1,9 +1,16 @@
 class SessionBookingsController < ApplicationController
+<<<<<<< HEAD
   before_action :set_booking, only: [:show, :destroy, :edit, :update]
   before_action :authorize_user_objects, only:[:index, :show, :new, :create, :destroy]
+=======
+  before_action :set_booking, only: [:show, :destroy]
+  before_action :require_login, only: [:index, :show, :new, :create, :destroy]
+>>>>>>> jigar
 
   def index
-    @bookings = SessionBooking.all
+    @bookings = SessionBooking.all.select do |session_booking|
+      session_booking.user_id == current_user.id
+    end #TODO grab the users sessionbookings
   end
 
   def show
@@ -14,7 +21,7 @@ class SessionBookingsController < ApplicationController
   end
 
   def new
-    @booking = SessionBooking.new
+    redirect_to '/'
   end
 
   def create
@@ -46,17 +53,13 @@ class SessionBookingsController < ApplicationController
 
   def set_booking
     bookings = SessionBooking.all.select do |b|
-      b.user_id == params[:user_id].to_i
+      b.user_id == current_user.id
     end
     if bookings.include?(SessionBooking.find(params[:id]))
       @booking = SessionBooking.find(params[:id])
     else
       nil
     end
-  end
-
-  def set_user
-    @user = @booking.user
   end
 
   def session_booking_params

@@ -3,12 +3,14 @@ class SessionsController < ApplicationController
     def index
       #check if user is logged in and assign user
       #if not then have user nil
-
       @schools = School.all
     end
 
     def new
       # renders login form from views/sessions/new
+      if(user_logged_in)
+        redirect_to "/users/#{current_user.id}"
+      end
     end
 
     def create
@@ -39,8 +41,7 @@ class SessionsController < ApplicationController
       @search_date = date.strftime("%A, %d-%B-%Y")
 
       @availabilities = Availability.all.select do |availability|
-          Availability.where(time_from: (date..(date + 1)))
+          (availability.time_from.to_date >= date) && (availability.time_until <= (date + 1))
       end
-
     end
 end

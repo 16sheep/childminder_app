@@ -53,7 +53,7 @@ class AvailabilitiesController < ApplicationController
   def set_availability
     availabilities = Availability.all.select do |a|
       if(a.user != nil)
-        params[:user_id].to_i == a.user.id
+        params[:user_id].to_i == a.user.id && a.number_of_children > 0
       end
     end
     if availabilities.include?(Availability.find(params[:id]))
