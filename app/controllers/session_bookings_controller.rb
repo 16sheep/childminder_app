@@ -1,11 +1,10 @@
 class SessionBookingsController < ApplicationController
-<<<<<<< HEAD
+
   before_action :set_booking, only: [:show, :destroy, :edit, :update]
   before_action :authorize_user_objects, only:[:index, :show, :new, :create, :destroy]
-=======
+
   before_action :set_booking, only: [:show, :destroy]
   before_action :require_login, only: [:index, :show, :new, :create, :destroy]
->>>>>>> jigar
 
   def index
     @bookings = SessionBooking.all.select do |session_booking|
