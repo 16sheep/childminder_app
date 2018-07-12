@@ -23,6 +23,7 @@ class SessionBookingsController < ApplicationController
 
   def create
     availability = Availability.find(params[:availability_id].to_i)
+<<<<<<< HEAD
     max_num_children = availability.number_of_children
     if params[:session_bookings][:children_ids].length - 1 <= max_num_children
       params[:session_bookings][:children_ids].each do |child_id|
@@ -33,6 +34,17 @@ class SessionBookingsController < ApplicationController
             availability.update(number_of_children: max_num_children)
             booking.save
           end
+=======
+    byebug
+    num_children = availability.number_of_children
+
+    if params[:session_bookings][:children_ids].length <= num_children
+      params[:session_bookings][:children_ids].each do |child_id|
+        if !child_id.empty?
+          booking = SessionBooking.create(user_id: params[:user_id], availability_id: params[:availability_id], child_id: child_id)
+          num_children -= 1
+          availability.update(number_of_children: num_children)
+>>>>>>> a619260b6c0e80a3bb1fbd00438555ac562613b6
         end
       end
       redirect_to user_session_bookings_path
@@ -47,7 +59,11 @@ class SessionBookingsController < ApplicationController
     num_children = a.number_of_children
     a.update(:number_of_children => num_children + 1)
     @booking.destroy
+<<<<<<< HEAD
     redirect_to user_session_bookings_path
+=======
+    redirect_to user_session_bookings_path(current_user.id)
+>>>>>>> a619260b6c0e80a3bb1fbd00438555ac562613b6
   end
 
   private

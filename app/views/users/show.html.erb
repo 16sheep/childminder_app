@@ -20,6 +20,7 @@
         <a href="/users/<%="#{@user.id}"%>/children/new" class="btn btn-primary">New Child</a>
       </div>
 
+<<<<<<< HEAD
       <hr>
       <span class="text-center col-sm-12">
       <%= link_to "Your Bookings", user_session_bookings_path(@user) %>
@@ -31,3 +32,9 @@
     </div>
   </div>
 </div>
+=======
+<h2><%= link_to "Your Bookings", user_session_bookings_path(@user) %></h2>
+
+<h2><%= link_to "Your Availabilities", user_availabilities_path(@user) %></h2>
+<h2><%= link_to "Update details", edit_user_path(@user) %></h2>
+>>>>>>> a619260b6c0e80a3bb1fbd00438555ac562613b6
