@@ -38,11 +38,11 @@ class SessionsController < ApplicationController
         school_id = params[:school_id]
         date_array = params[:date].values.map {|v| v.to_i}
         date = Date.new(date_array[2], date_array[1], date_array[0])
-
         @search_date = date.strftime("%A, %d-%B-%Y")
-
         @availabilities = Availability.all.select do |availability|
-            availability.number_of_children > 0 && (availability.time_from.to_date >= date) && (availability.time_until <= (date + 1))
+            if(availability.number_of_children != nil)
+              availability.number_of_children > 0 && (availability.time_from >= date) && (availability.time_until <= (date + 1))
+            end
         end
       else
         redirect_to '/'

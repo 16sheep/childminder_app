@@ -21,26 +21,29 @@
                   <%= booking.child.name %>
                 </small><br>
                 <medium>with Child Minder:</medium><br>
-                    <small>
-                      <% if(booking.availability.posting) %>
-                          <%= booking.availability.posting.user.name %>
-                      <% end %>
-                    </small>
-                  </p>
-                  <hr>
-                  <%= link_to "View", user_session_booking_path(current_user, booking), class:"btn btn-dark" %>
-                  <%= link_to "Cancel", user_session_booking_path(current_user, booking), class:"btn btn-dark" %>
-                  <hr>
-                  <p class="card-text">
-                    <small class="text-muted">Booking ID:
-                      <%= booking.id %>
-                    </small>
-                  </p>
-                </div>
-              </div>
+                <small>
+                  <% if(booking.availability.posting) %>
+                    <%= booking.availability.posting.user.name %>
+                  <% end %>
+                </small>
+              </p>
+              <hr>
+              <%= link_to "View", user_session_booking_path(current_user, booking), class:"btn btn-dark" %>
+              <%= link_to "Cancel", user_session_booking_path(current_user, booking), class:"btn btn-dark" %>
+              <hr>
+              <p class="card-text">
+                <small class="text-muted">Booking ID:
+                  <%= booking.id %>
+                </small>
+              </p>
+            </div>
           </div>
-          <%  end %>
         </div>
-      </div>
+      <%  end %>
+    </div>
 
-      </div>
+  </div>
+  <% #Calendar %>
+
+
+  </div>

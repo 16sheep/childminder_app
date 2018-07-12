@@ -2,7 +2,6 @@ class SessionBookingsController < ApplicationController
 
   before_action :set_booking, only: [:show, :destroy, :edit, :update]
   before_action :authorize_user_objects, only:[:index, :show, :new, :create, :destroy]
-
   before_action :require_login, only: [:index, :show, :new, :create, :destroy]
 
   def index
@@ -24,6 +23,7 @@ class SessionBookingsController < ApplicationController
 
   def create
     availability = Availability.find(params[:availability_id].to_i)
+    byebug
     num_children = availability.number_of_children
 
     if params[:session_bookings][:children_ids].length <= num_children
@@ -31,7 +31,7 @@ class SessionBookingsController < ApplicationController
         if !child_id.empty?
           booking = SessionBooking.create(user_id: params[:user_id], availability_id: params[:availability_id], child_id: child_id)
           num_children -= 1
-          availability.update(:number_of_children => num_children)            
+          availability.update(number_of_children: num_children)
         end
       end
       redirect_to user_session_bookings_path

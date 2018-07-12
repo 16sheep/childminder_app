@@ -34,18 +34,14 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
-    posting = Posting.find_or_create_by(user_id: params[:user_id], school_id: params[:availability][:school_id])
-    availability = Availability.create(availability_params)
+    availability = Availability.new(availability_params)
+    posting = Posting.find_or_initialize_by(user_id: params[:user_id], school_id: params[:availability][:school_id])
     posting.availabilities << availability
     posting.save
-    if availability.valid?
-      availability.posting = posting
-      availability.save
-      redirect_to user_availabilities_url(availability.user.id)
-    else
-      flash[:errors] = flash[:error] = availability.errors.full_messages
-      redirect_to new_user_availability_path(current_user.id)
-    end
+    availability.posting = posting
+    availability.save
+    byebug
+    redirect_to user_availabilities_url(availability.user.id)
   end
 
   def destroy
