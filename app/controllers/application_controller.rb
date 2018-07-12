@@ -24,21 +24,6 @@ class ApplicationController < ActionController::Base
 
     def authorize_user_objects
       if !session[:user_id] || current_user.id != params[:user_id].to_i
-
-        redirect_to "/"
-      end
-    end
-
-    def authorize_user_availability
-      if !session[:user_id] || current_user.id != @availability.user.id
-        flash[:notice] = "You are not authorized to view this page"
-        redirect_to "/"
-      end
-    end
-
-    def authorize_user_bookings
-      if !session[:user_id] || current_user.id != @session_booking.user_id
-        flash[:notice] = "You are not authorized to view this page"
         redirect_to "/"
       end
     end

@@ -1,6 +1,9 @@
 <div class="container">
+    <div class="text-center">
+      <h2> Search for a child minder </h2>
+      <hr>
+    </div>
 
-    <h1> This is the home page</h1>
     <div class="card text-center">
         <div class="card-header">
             Book A Child Minder
@@ -12,7 +15,9 @@
                 <%= form_tag '/search', method: :get, class:"form-group" do %>
                 <div class="col-sm">
                     <%= label_tag "school" %>
-                    <%= collection_select(:school_id, :school_id, @schools, :id, :name) %>
+                    <span class="selectpicker">
+                      <%= collection_select(:school_id, :school_id, @schools, :id, :name) %>
+                    </span>
                 </div>
 
                 <div class="col-sm">
