@@ -45,6 +45,7 @@ class AvailabilitiesController < ApplicationController
     else
       flash[:errors] = flash[:error] = availability.errors.full_messages
       redirect_to new_user_availability_path(current_user.id)
+    end
   end
 
   def destroy
