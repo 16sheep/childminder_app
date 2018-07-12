@@ -5,10 +5,7 @@
 <hr>
 
 
-<%= @booking.availability %>
-
-<%= "TURN THIS INTO A FORM" %>
-
+<%= @booking.availability.user.name %>
 
 <%= form_tag user_session_booking_path(current_user.id,@booking.id), method: "delete" do %>
   <%= submit_tag "Cancel booking" %>

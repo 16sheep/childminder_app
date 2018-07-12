@@ -55,9 +55,10 @@
 </div>
 </nav>
 
-<div class="text-center">
-  <% if flash[:notice] %>
-     <div class="notice"><%= flash[:notice] %></div>
-  <% end %>
-</div>
+  <div class="text-center">
+    <% if flash[:notice] %>
+       <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+    <%= render 'errors/errors' %>
+  </div>
 </div>
