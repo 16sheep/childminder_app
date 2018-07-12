@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :show, :destroy]
+  before_action :set_user, only: [:edit, :show, :destroy, :update]
   before_action :require_login, only: [:show, :edit, :update, :delete]
 
   def show
@@ -22,8 +22,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    redirect_to '/login'
+    @user = User.new(user_params)
+    if @user.valid?
+      @user.save
+      flash[:notice] = "Your account was created successfully, you can log in"
+      redirect_to '/login'
+    else
+      flash[:errors] = @user.errors.full_messages
+      redirect_to '/signup'
+    end
   end
 
   def update
@@ -33,11 +40,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user.destroy
+    session[:user_id] = nil
+    flash[:notice] = "Account deleted"
+    redirect_to '/'
   end
 
   private
   def set_user
-      @user = User.find(params[:id])
+      @user = User.find(current_user.id)
   end
 
   def user_params

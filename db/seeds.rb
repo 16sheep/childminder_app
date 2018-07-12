@@ -10,3 +10,4 @@ School.create(name: "Westminister School", address: "123 Mayfair")
 School.create(name: "Lowther Primary School", address: "54 Washington Road")
 School.create(name: "St. Pauls", address: "34 Castelnau")
 School.create(name: "Barnes Primary School", address: "12 Whiteheart Lane")
+

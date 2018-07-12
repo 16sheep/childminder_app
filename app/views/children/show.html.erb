@@ -6,6 +6,11 @@
 
 <h2>Bookings for <%= @child.name %></h2>
 
-<%= month_calendar do |date| %>
+<%= month_calendar events: @bookings do |date, booking| %>
   <%= date %>
+  <% booking.each do |booking| %>
+    <div>
+      <span>Booked with <%=booking.user.name%></span>
+    </div>
+  <% end %>
 <% end %>

@@ -4,9 +4,7 @@ class AvailabilitiesController < ApplicationController
 
   def index
     @available_dates = Availability.all.select do |availability|
-      if availability.user != nil
-        availability.user.id = params[:user_id].to_i
-      end
+        availability.user.id == current_user.id
     end
   end
 
@@ -14,6 +12,9 @@ class AvailabilitiesController < ApplicationController
     if @availability == nil
       flash[:notice] = "The childminder and availability don't match"
       redirect_to '/'
+    end
+    if @availability.session_bookings
+      @bookings = @availability.session_bookings
     end
   end
 
@@ -23,6 +24,7 @@ class AvailabilitiesController < ApplicationController
   def update
     @availability.update(availability_params)
     @availability.save
+    flash[:notice] = "Availability was updated"
     redirect_to user_availability_url(@availability)
   end
 
@@ -38,7 +40,8 @@ class AvailabilitiesController < ApplicationController
     posting.save
     availability.posting = posting
     availability.save
-
+    
+    flash[:notice] = "New availability was created"
     redirect_to user_availabilities_url(availability.user.id)
   end
 
@@ -58,13 +61,10 @@ class AvailabilitiesController < ApplicationController
   end
 
   def set_availability
-    availabilities = Availability.all.select do |a|
-      if(a.user != nil)
-        params[:user_id].to_i == a.user.id && a.number_of_children > 0
-      end
-    end
-    if availabilities.include?(Availability.find(params[:id]))
-      @availability = Availability.find(params[:id])
+    availability = Availability.find(params[:id])
+    if(availability.user.id == current_user.id)
+      @availability = availability
+
     else
       nil
     end

@@ -1,3 +1,7 @@
 <h1>Update</h1>
   <%= render 'form' %>
 <%= link_to "Back to your details", @user%>
+
+<%= form_tag user_path(@user.id), method: "delete" do %>
+  <%= submit_tag "Delete Account" %>
+<% end %>

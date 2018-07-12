@@ -33,6 +33,7 @@ class SessionBookingsController < ApplicationController
             availability.update(number_of_children: max_num_children)
             booking.save
           end
+
         end
       end
       redirect_to user_session_bookings_path

@@ -4,11 +4,13 @@
   <h3><%=link_to "Add a new availability", new_user_availability_path %><br></h3>
 <% end %>
 
-<%= month_calendar events: @available_dates do |date, availability| %>
+<%= month_calendar events: @available_dates do |date, a| %>
   <%= date %>
-  <% availability.each do |availability| %>
+  <% a.each do |availability| %>
     <div>
-      <%= link_to availability.user.name, user_availability_path(availability.user.id, availability.id) %>
+      <p>Available places <%= availability.number_of_children %></p>
+      <p>Booked places <%= availability.session_bookings.length %></p>
+      <%= link_to "View", user_availability_path(current_user, availability) %></p>
     </div>
   <% end %>
 <% end %>
