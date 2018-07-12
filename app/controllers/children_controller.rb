@@ -7,6 +7,11 @@ class ChildrenController < ApplicationController
       flash[:notice] = "The child and parent don't match"
       redirect_to '/'
     end
+    @bookings = Availability.all.select do |availability|
+      availability.session_bookings.select do |booking|
+         booking.child_id == @child.id
+      end
+    end
   end
 
   def edit

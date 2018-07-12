@@ -5,9 +5,14 @@
 <p>Until<%= @availability.time_until %></p>
 <p>Number of children <%= @availability.number_of_children %></p>
 
-<ul>
-  <span> SHOW THE CHILDREN THE CHILD MINDER HAS FOR THIS SECTION</span>
-</ul>
+<h3> Children booked for this availability</h3>
+<ol>
+  <% @bookings.each do |booking| %>
+    <h5><%= booking.child.name  %><h5>
+      <span>Parent: <%=booking.child.user.name %></span><br>
+      <span>Contact: <%=booking.child.user.email %></span>
+  <% end %>
+</ol>
 
 
 <% if current_user.id == @availability.user.id %>

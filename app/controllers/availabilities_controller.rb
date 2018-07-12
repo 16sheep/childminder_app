@@ -15,6 +15,9 @@ class AvailabilitiesController < ApplicationController
       flash[:notice] = "The childminder and availability don't match"
       redirect_to '/'
     end
+    if @availability.session_bookings
+      @bookings = @availability.session_bookings
+    end
   end
 
   def edit
@@ -32,12 +35,16 @@ class AvailabilitiesController < ApplicationController
 
   def create
     availability = Availability.create(availability_params)
-    posting = Posting.find_or_create_by(user_id: params[:user_id], school_id: params[:availability][:school_id])
-    posting.availabilities << availability
-    posting.save
-    availability.posting = posting
-    availability.save
-    redirect_to user_availabilities_url(availability.user.id)
+    if availability.valid?
+      posting = Posting.find_or_create_by(user_id: params[:user_id], school_id: params[:availability][:school_id])
+      posting.availabilities << availability
+      posting.save
+      availability.posting = posting
+      availability.save
+      redirect_to user_availabilities_url(availability.user.id)
+    else
+      flash[:errors] = flash[:error] = availability.errors.full_messages
+      redirect_to new_user_availability_path(current_user.id)
   end
 
   def destroy
@@ -51,13 +58,10 @@ class AvailabilitiesController < ApplicationController
   end
 
   def set_availability
-    availabilities = Availability.all.select do |a|
-      if(a.user != nil)
-        params[:user_id].to_i == a.user.id && a.number_of_children > 0
-      end
-    end
-    if availabilities.include?(Availability.find(params[:id]))
-      @availability = Availability.find(params[:id])
+    availability = Availability.find(params[:id])
+    if(availability.user.id == current_user.id)
+      @availability = availability
+
     else
       nil
     end

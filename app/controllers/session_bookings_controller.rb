@@ -25,13 +25,13 @@ class SessionBookingsController < ApplicationController
   def create
     availability = Availability.find(params[:availability_id].to_i)
     num_children = availability.number_of_children
+
     if params[:session_bookings][:children_ids].length <= num_children
       params[:session_bookings][:children_ids].each do |child_id|
         if !child_id.empty?
           booking = SessionBooking.create(user_id: params[:user_id], availability_id: params[:availability_id], child_id: child_id)
           num_children -= 1
-          availability.update(:number_of_children => num_children)
-          byebug
+          availability.update(:number_of_children => num_children)            
         end
       end
       redirect_to user_session_bookings_path
@@ -42,10 +42,11 @@ class SessionBookingsController < ApplicationController
   end
 
   def destroy
-    a = Availability.find(@booking.availablity_id)
+    a = Availability.find(@booking.availability_id)
     num_children = a.number_of_children
     a.update(:number_of_children => num_children + 1)
     @booking.destroy
+    redirect_to user_session_bookings_path(current_user.id)
   end
 
   private

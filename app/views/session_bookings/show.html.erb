@@ -8,5 +8,10 @@
 <%= @booking.availability %>
 
 <%= "TURN THIS INTO A FORM" %>
-<%= link_to "Delete Booking", edit_user_session_booking_path(current_user.id) %><br>
+
+
+<%= form_tag user_session_booking_path(current_user.id,@booking.id), method: "delete" do %>
+  <%= submit_tag "Cancel booking" %>
+<% end %>
+
 <%= link_to "Go Back", "/users/#{current_user.id}/session_bookings" %>
