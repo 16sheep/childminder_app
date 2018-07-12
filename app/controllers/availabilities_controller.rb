@@ -61,6 +61,7 @@ class AvailabilitiesController < ApplicationController
     availability = Availability.find(params[:id])
     if(availability.user.id == current_user.id)
       @availability = availability
+
     else
       nil
     end

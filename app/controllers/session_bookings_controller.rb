@@ -8,7 +8,7 @@ class SessionBookingsController < ApplicationController
   def index
     @bookings = SessionBooking.all.select do |session_booking|
       session_booking.user_id == current_user.id
-    end
+    end 
   end
 
   def show
@@ -25,7 +25,9 @@ class SessionBookingsController < ApplicationController
   def create
     availability = Availability.find(params[:availability_id].to_i)
     num_children = availability.number_of_children
+
     if params[:session_bookings][:children_ids].length <= num_children
+
       params[:session_bookings][:children_ids].each do |child_id|
         if !child_id.empty?
           booking = SessionBooking.create(user_id: params[:user_id], availability_id: params[:availability_id], child_id: child_id)

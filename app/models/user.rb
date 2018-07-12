@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :availabilities, through: :session_bookings, dependent: :destroy
 
 
+
   accepts_nested_attributes_for :children, reject_if: proc { |attributes| attributes['name'].blank? }
 
 

@@ -5,6 +5,7 @@
 
 <%= "TURN THIS INTO A FORM" %>
 
+
 <%= form_tag user_session_booking_path(current_user.id,@booking.id), method: "delete" do %>
   <%= submit_tag "Cancel booking" %>
 <% end %>

@@ -42,7 +42,7 @@ class SessionsController < ApplicationController
         @search_date = date.strftime("%A, %d-%B-%Y")
 
         @availabilities = Availability.all.select do |availability|
-            availability.number_of_children > 0 && (availability.time_from >= date) && (availability.time_until <= (date + 1))
+            availability.number_of_children > 0 && (availability.time_from.to_date >= date) && (availability.time_until <= (date + 1))
         end
       else
         redirect_to '/'
