@@ -1,8 +1,10 @@
 <div class="container">
 
-  <div class="row">
+  <hr>
+  <div class="row text-center">
     <h1 class="col-sm h4 mb-1 font-weight-light">Your Bookings</h1>
   </div>
+  <hr>
 
   <div class="container-fluid">
     <div class="row">
@@ -26,9 +28,8 @@
                     </small>
                   </p>
                   <hr>
-                  <%= link_to "View Booking", user_session_booking_path(current_user, booking), class:"btn btn-dark" %>
-                  <%= link_to "Cancel Booking", user_session_booking_path(current_user, booking), class:"btn btn-dark" %>
-
+                  <%= link_to "View", user_session_booking_path(current_user, booking), class:"btn btn-dark" %>
+                  <%= link_to "Cancel", user_session_booking_path(current_user, booking), class:"btn btn-dark" %>
                   <hr>
                   <p class="card-text">
                     <small class="text-muted">Booking ID:
