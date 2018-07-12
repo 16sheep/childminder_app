@@ -4,20 +4,44 @@
     <h1 class="col-sm h4 mb-1 font-weight-light">Your Bookings</h1>
   </div>
 
-    <% @bookings.each do | booking | %>
-
+  <div class="container-fluid">
     <div class="row">
-          <ul>
-            <li> <%= link_to booking.id, user_session_booking_path(current_user, booking) %> </li>
-            <li> <%= booking.child.name %> </li>
-            <% if(booking.availability.posting) %>
-              <li> <%= booking.availability.posting.user.name %> </li>
-            <% end %>
-            <button type="button" name="button">CANCEL BOOKING</button>
-          </ul>
-    </div>
-    <%  end %>
+      <% @bookings.each do | booking | %>
+        <div class="card-group col-sm-4 mb-2 mt-2">
+          <div class="card text-center" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= booking.availability.time_from.strftime("%A, %d %B") %>
+              </h5>
+              <p class="card-text">
+                <medium>Booking For Child:</medium><br>
+                <small>
+                  <%= booking.child.name %>
+                </small><br>
+                <medium>with Child Minder:</medium><br>
+                    <small>
+                      <% if(booking.availability.posting) %>
+                          <%= booking.availability.posting.user.name %>
+                      <% end %>
+                    </small>
+                  </p>
+                  <hr>
+                  <%= link_to "View Booking", user_session_booking_path(current_user, booking), class:"btn btn-dark" %>
+                  <%= link_to "Cancel Booking", user_session_booking_path(current_user, booking), class:"btn btn-dark" %>
 
-    <% #Calendar %>
+                  <hr>
+                  <p class="card-text">
+                    <small class="text-muted">Booking ID:
+                      <%= booking.id %>
+                    </small>
+                  </p>
+                </div>
+              </div>
+          </div>
+          <%  end %>
+        </div>
 
-</div>
+      </div>
+      <% #Calendar %>
+
+      </div>
