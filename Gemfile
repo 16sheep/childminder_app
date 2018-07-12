@@ -30,6 +30,8 @@ gem "simple_calendar", "~> 2.0"
 gem 'jquery-rails'
 gem 'rails-ujs'
 
+gem 'pry'
+
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 # Use ActiveStorage variant

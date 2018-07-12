@@ -1,10 +1,23 @@
 <div class="container">
 
+  <div class="row">
+    <h1 class="col-sm h4 mb-1 font-weight-light">Your Bookings</h1>
+  </div>
+
+    <% @bookings.each do | booking | %>
+
     <div class="row">
-        <h1 class="col-sm h4 mb-1 font-weight-light">Your Bookings</h1>
-        <% #Calendar %>
+          <ul>
+            <li> <%= link_to booking.id, user_session_booking_path(current_user, booking) %> </li>
+            <li> <%= booking.child.name %> </li>
+            <% if(booking.availability.posting) %>
+              <li> <%= booking.availability.posting.user.name %> </li>
+            <% end %>
+            <button type="button" name="button">CANCEL BOOKING</button>
+          </ul>
     </div>
+    <%  end %>
 
-
+    <% #Calendar %>
 
 </div>
