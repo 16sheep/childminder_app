@@ -10,21 +10,22 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Book A Child Minder</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text">Choose a Date and School to see availabile childminders.</p>
             <div class="card-content">
-                <%= form_tag '/search', method: :get, class:"form-group" do %>
+                <%= form_tag "#{if(user_logged_in) then "/search" else "/login" end}", method: :get, class:"form-group" do %>
                 <div class="col-sm">
-                    <%= label_tag "school" %>
+                    <%= label_tag "school" %> <br>
                     <span class="selectpicker">
                       <%= collection_select(:school_id, :school_id, @schools, :id, :name) %>
                     </span>
                 </div>
-
                 <div class="col-sm">
-                    <%= label_tag "date" %>
+                    <%= label_tag "date" %> <br>
                     <%= date_select("date", "preferred_date", order: [:day, :month, :year], :discard_year => true, :default => Date.today) %>
                 </div>
-                <%= submit_tag "Search Avalabilities", class:"btn btn-primary" %>
+                <hr>
+                <%= submit_tag "Search Avalabilities", class:"btn btn-dark" %>
+                <hr>
                 <% end %>
             </div>
         </div>

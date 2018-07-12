@@ -1,14 +1,38 @@
-<hr>
-<div class="row text-center">
-  <h1 class="col-sm h4 mb-1 font-weight-light">Viewing Booking ID: <%= @booking.id %></h1>
+<div class="container text-center">
+  <hr>
+  <div class="row text-center">
+    <h1 class="col-sm h4 mb-1 font-weight-light">Viewing Booking ID:
+      <%= @booking.id %></h1>
+  </div>
+  <hr>
+
+<div class="row">
+      <div class="card col-12">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= @booking.availability.time_from.strftime("%A, %d %B") %>
+          </h5>
+          <p class="card-text">
+            <medium>Booking For Child:</medium><br>
+            <small>
+              <%= @booking.child.name %>
+            </small><br>
+            <medium>with Child Minder:</medium><br>
+            <small>
+              <% if(@booking.availability.posting) %>
+                <%= @booking.availability.posting.user.name %>
+              <% end %>
+            </small>
+          </p>
+          <hr>
+          <%= button_to "Cancel", user_session_booking_path(current_user, @booking), :method => "delete", class:"btn btn-dark" %>
+            <br><span><%= link_to "Go Back", "/users/#{current_user.id}/session_bookings" %> </span>
+          <hr>
+        </div>
+    </div>
+  </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4263802a8d4fb1ff3f7754e3e74f7de13b06f04c
 </div>
-<hr>
-
-
-<%= @booking.availability.user.name %>
-
-<%= form_tag user_session_booking_path(current_user.id,@booking.id), method: "delete" do %>
-  <%= submit_tag "Cancel booking" %>
-<% end %>
-
-<%= link_to "Go Back", "/users/#{current_user.id}/session_bookings" %>
