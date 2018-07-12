@@ -1,14 +1,33 @@
-<h1><%= @user.name %></h1>
+<div class="container">
+    <div class="card text-center">
+    <div class="card-header">
+      Your Profile
+    </div>
+    <div class="card-body">
+      <h3 class="card-title"> <%= @user.name %> </h3>
+      <p class="card-text">
+        <hr>
+        <span> <h5>Your children</h5> </span>
 
-<h2>Your children</h2>
-<ul>
-  <% @children.each do |child| %>
-    <li><h3><%=link_to child.name, [@user,child] %></h3></li>
-  <% end  %>
-</ul>
+          <% @children.each do |child| %>
+          <span>
+          <%=link_to child.name, [@user,child] %>
+          </span>
+          <% end  %>
+      </p>
 
-<%= link_to "Add a child", new_user_child_path(@user.id) %>
+      <div class="text-center col-sm-12">
+        <a href="/users/<%="#{@user.id}"%>/children/new" class="btn btn-primary">New Child</a>
+      </div>
 
-<h2><%= link_to "Your Bookings", user_session_bookings_path(@user) %></h2>
-
-<h2><%= link_to "Your Availabilities", user_availabilities_path(@user) %></h2>
+      <hr>
+      <span class="text-center col-sm-12">
+      <%= link_to "Your Bookings", user_session_bookings_path(@user) %>
+    </span>
+      <%= link_to "Your Availabilities", user_availabilities_path(@user) %>
+    </div>
+    <div class="card-footer text-muted">
+      
+    </div>
+  </div>
+</div>

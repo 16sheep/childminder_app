@@ -1,12 +1,52 @@
-<%=form_for [:user, @availability] do |f| %>
-  <%= f.label "From" %>
-  <%= f.label :days%>
-  <%= datetime_field("availability", "time_from", min: Date.today)%>
-  <%= f.label "Until" %>
-  <%= datetime_field("availability", "time_until", min: Date.today)%>
-  <%= f.label :number_of_children %>
-  <%= f.number_field :number_of_children %>
-  <%= f.collection_select :school_id, School.all, :id, :name %>
-  <%= f.submit %>
-<% end %>
-<%= link_to "Cancel", "/users/#{session[:user_id]}" %>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card m-1">
+        <div class="card-header">
+          New Childminder Session
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+          <%=form_for [:user, @availability] do |f| %>
+          <div class="col-sm">
+              <medium>Date:</medium> <br>
+              <%= date_select("date", "preferred_date", order: [:day, :month, :year], :discard_year => true, :default => Date.today) %>
+          </div>
+          <div class="col-sm">
+            <medium>Session Time From:</medium> <br>
+            <%= f.time_field :time_from %>
+          </div>
+
+          <div class="col-sm">
+          <medium> Session Time To:  </medium> <br>
+          <%= f.time_field :time_until %>
+          </div>
+
+          <div class="col-sm">
+            <medium> Max Slots Available: </medium> <br>
+            <%= f.number_field :number_of_children %>
+          </div>
+
+          <div class="col-sm">
+            <medium> Max Slots Available: </medium> <br>
+            <%= f.collection_select :school_id, School.all, :id, :name %>
+          </div>
+          </p>
+        </div>
+        <span class="">
+          <%= f.submit class:"btn btn-primary"  %>
+        </span>
+        <br>
+          <span class="">
+        <button class="btn btn-primary" href="/users/#{session[:user_id]}" method="post" type="button" name="button">Cancel</button>
+      </span>
+      <% end %>
+      <p class="card-text">
+        <small class="text-muted">Slots Available:
+          <span></span>
+        </small>
+      </p>
+    </div>
+  </div>
+</div>
+</div>

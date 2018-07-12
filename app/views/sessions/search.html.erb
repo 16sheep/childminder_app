@@ -1,29 +1,40 @@
 <div class="container text-center">
 
-  <h1>Available Times for
-    <%= @search_date %></h1>
   <hr>
+  <div class="row text-center">
+    <h1 class="col-sm h4 mb-1 font-weight-light"> Available Times for <%= @search_date %> %></h1>
+  </div>
+  <hr>
+  
     <% @availabilities.each do |available_date| %>
-      <div class="row">
+      <div class="row m-1">
         <div class="col-sm-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title"> <%=  %>  </h5>
-            <%= form_tag "/users/#{current_user.id}/session_bookings", method: :post do %>
-            <p class="card-text"></p>
-            <%= collection_check_boxes(:session_bookings, :children_ids, current_user.children, :id, :name) %>
-            <p class="card-text">
-              <small class="text-muted">Slots Available: <span><%= available_date.number_of_children %></span></small>
-            </p>
-            <input type="hidden" value="<%= available_date.id %>" name="availability_id"/>
-            <%= submit_tag 'Book' %>
-            <% end %>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                Child Minder: <%= available_date.posting.user.name %>
+              </h5>
+              <%= form_tag "/users/#{current_user.id}/session_bookings", method: :post do %>
+              <p class="card-text"></p>
+              <%= collection_check_boxes(:session_bookings, :children_ids, current_user.children, :id, :name) %>
+              <p class="card-text">
+                <small class="text-muted">Slots Available:
+                  <span><%= available_date.number_of_children %></span></small>
+              </p>
+              <input type="hidden" value="<%= available_date.id %>" name="availability_id"/>
+              <hr>
+              <% if current_user.children.length > 0 %>
+              <%= submit_tag 'Book' %>
+              <% else %>
+              <%= label_tag "Please Register Children From You Profile to Book a Slot." %>
+              <% end %>
+              <hr>
+            </div>
           </div>
+        </div>
+        <% end %>
       </div>
-    </div>
-    <!-- <li> <span>Number Of Kids: <%= available_date.number_of_children %></span> <%= available_date.time_from.strftime("%H:%M %p") %> <%= available_date.time_until.strftime("%H:%M %p") %> <%= form_tag "/users/#{current_user.id}/session_bookings",
-    method: :post do %> <%= collection_check_boxes(:session_bookings, :children_ids, current_user.children, :id, :name) %> <input type="hidden" value="<%= available_date.id %>" name="availability_id"/> <%= submit_tag 'Book' %> <% end %> </li> -->
-  <% end %>
-</ul>
+      <% end %>
+
 
 </div>

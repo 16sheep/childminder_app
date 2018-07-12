@@ -32,12 +32,13 @@ class AvailabilitiesController < ApplicationController
 
   def create
     availability = Availability.new(availability_params)
+    byebug
     posting = Posting.find_or_initialize_by(user_id: params[:user_id], school_id: params[:availability][:school_id])
     posting.availabilities << availability
     posting.save
     availability.posting = posting
     availability.save
-    byebug
+
     redirect_to user_availabilities_url(availability.user.id)
   end
 
@@ -48,7 +49,12 @@ class AvailabilitiesController < ApplicationController
 
   private
   def availability_params
-    params.require(:availability).permit(:time_from, :time_until, :number_of_children, :cost_per_hour)
+    
+    date_array = params[:date].values.map {|v| v.to_i}
+    params[:availability][:time_from] = Time.new(date_array[2], date_array[1], date_array[0], params[:availability][:time_from].to_time.hour, params[:availability][:time_from].to_time.min)
+    params[:availability][:time_until] = Time.new(date_array[2], date_array[1], date_array[0], params[:availability][:time_until].to_time.hour, params[:availability][:time_until].to_time.min)
+
+    params.require(:availability).permit(:time_until, :time_from, :number_of_children, :cost_per_hour)
   end
 
   def set_availability

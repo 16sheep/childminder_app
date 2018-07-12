@@ -3,12 +3,10 @@ class ApplicationController < ActionController::Base
 
     helper_method :current_user, :require_login, :user_logged_in
 
-    #before_action :user_logged_in
-
     def current_user
       #Identifies and returns the user from session hash
       if(session[:user_id] && session[:user_id] != nil)
-          return User.find(session[:user_id])
+          User.find(session[:user_id])
       else
           nil
       end
