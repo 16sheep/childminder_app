@@ -8,19 +8,29 @@ class ChildrenController < ApplicationController
       redirect_to '/'
     end
     @bookings = Availability.all.select do |availability|
-      availability.session_bookings.select do |booking|
-         booking.child_id == @child.id
+      if availability.session_bookings.length > 0
+        availability.session_bookings.select do |booking|
+          booking.child_id == @child.id
+        end
       end
     end
   end
+
+
 
   def edit
   end
 
   def update
     @child.update(child_params)
-    child.save
-    redirect_to "/users/#{child.parent_id}"
+    if @child.valid?
+      @child.save
+      flash[:notice] = "Updated successfully"
+      redirect_to "/users/#{current_user.id}"
+    else
+      flash[:errors] = @child.errors.full_messages
+      redirect_to edit_user_child_path(current_user)
+    end
   end
 
   def new
@@ -28,10 +38,16 @@ class ChildrenController < ApplicationController
   end
 
   def create
-    child = Child.create(child_params)
-    child.user = current_user
-    child.save
-    redirect_to "/users/#{child.user_id}"
+    @child = Child.new(child_params)
+    @child.user = current_user
+    if @child.valid?
+      @child.save
+      flash[:notice] = "New child was added"
+      redirect_to "/users/#{@child.user_id}"
+    else
+      flash[:errors] = @child.errors.full_messages
+      redirect_to new_user_child_path(current_user)
+    end
   end
 
   def destroy

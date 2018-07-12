@@ -10,8 +10,9 @@ class User < ApplicationRecord
   has_many :schools, through: :postings, dependent: :destroy
   has_many :session_bookings, dependent: :destroy
   has_many :availabilities, through: :session_bookings, dependent: :destroy
-
-
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true
+  validates :password, :length => { :minimum => 6}
 
   accepts_nested_attributes_for :children, reject_if: proc { |attributes| attributes['name'].blank? }
 
