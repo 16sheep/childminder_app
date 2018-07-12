@@ -31,12 +31,13 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
-    availability = Availability.create(availability_params)
-    posting = Posting.find_or_create_by(user_id: params[:user_id], school_id: params[:availability][:school_id])
+    availability = Availability.new(availability_params)
+    posting = Posting.find_or_initialize_by(user_id: params[:user_id], school_id: params[:availability][:school_id])
     posting.availabilities << availability
     posting.save
     availability.posting = posting
     availability.save
+    byebug
     redirect_to user_availabilities_url(availability.user.id)
   end
 
