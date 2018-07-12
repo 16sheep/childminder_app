@@ -12,7 +12,7 @@
             <h5 class="card-title">Book A Child Minder</h5>
             <p class="card-text">Choose a Date and School to see availabile childminders.</p>
             <div class="card-content">
-                <%= form_tag '/search', method: :get, class:"form-group" do %>
+                <%= form_tag "#{if(user_logged_in) then "/search" else "/login" end}", method: :get, class:"form-group" do %>
                 <div class="col-sm">
                     <%= label_tag "school" %> <br>
                     <span class="selectpicker">

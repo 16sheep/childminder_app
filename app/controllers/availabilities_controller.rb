@@ -4,9 +4,7 @@ class AvailabilitiesController < ApplicationController
 
   def index
     @available_dates = Availability.all.select do |availability|
-      if availability.user != nil
-        availability.user.id = params[:user_id].to_i
-      end
+        availability.user.id == current_user.id
     end
   end
 
@@ -26,6 +24,7 @@ class AvailabilitiesController < ApplicationController
   def update
     @availability.update(availability_params)
     @availability.save
+    flash[:notice] = "Availability was updated"
     redirect_to user_availability_url(@availability)
   end
 
@@ -41,7 +40,8 @@ class AvailabilitiesController < ApplicationController
     posting.save
     availability.posting = posting
     availability.save
-
+    
+    flash[:notice] = "New availability was created"
     redirect_to user_availabilities_url(availability.user.id)
   end
 

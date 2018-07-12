@@ -2,6 +2,9 @@ class Availability < ApplicationRecord
   belongs_to :posting
   has_many :session_bookings, dependent: :destroy
   has_many :users, through: :session_bookings, dependent: :destroy
+  validates :time_from, presence: true
+  validates :time_until, presence: true
+  validates :number_of_children, presence: true
 
 
   def school_id=(school_id)
