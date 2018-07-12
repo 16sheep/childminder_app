@@ -1,5 +1,7 @@
 class Availability < ApplicationRecord
   belongs_to :posting
+  has_many :session_bookings
+  has_many :users, through: :session_bookings
 
   def school_id=(school_id)
     @school_id = school_id

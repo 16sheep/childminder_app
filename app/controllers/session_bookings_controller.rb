@@ -24,17 +24,20 @@ class SessionBookingsController < ApplicationController
   end
 
   def create
+
     availability = Availability.find(params[:availability_id].to_i)
     num_children = availability.number_of_children
+
     if num_children >= params[:session_bookings][:children_ids].length && num_children > 0
       params[:session_bookings][:children_ids].each do |child_id|
         if !child_id.empty?
-          booking = SessionBooking.create(user_id: current_user.id, availability_id: params[:availability_id], child_id: child_id)
+          booking = SessionBooking.create(user_id: params[:user_id], availability_id: params[:availability_id], child_id: child_id)
+          byebug
           num_children -= 1
           availability.update(:number_of_children => num_children)
         end
       end
-    redirect_to user_session_bookings_path
+      redirect_to user_session_bookings_path
     else
       flash[:notices] = "There is not enough spaces"
       redirect_to user_availability_path(availability.user.id, availability.id)

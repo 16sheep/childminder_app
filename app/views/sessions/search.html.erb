@@ -14,9 +14,7 @@
         <%= collection_check_boxes(:session_bookings, :children_ids, current_user.children, :id, :name) %>
         <input type="hidden" value="<%= available_date.id %>" name="availability_id"/>
         <%= submit_tag 'Book' %>
-
         <% end %>
-
     </li>
   <% end %>
 </ul>

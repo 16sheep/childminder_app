@@ -2,6 +2,11 @@
 
     <div class="row">
         <h1 class="col-sm h4 mb-1 font-weight-light">Your Bookings</h1>
+        <%= @bookings.each do |booking | %>
+          <ul>
+            <li> <%= booking.id %> </li>
+          </ul>
+        <%  end %>
         <% #Calendar %>
     </div>
 
