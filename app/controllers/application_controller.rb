@@ -24,7 +24,6 @@ class ApplicationController < ActionController::Base
 
     def authorize_user_objects
       if !session[:user_id] || current_user.id != params[:user_id].to_i
-
         redirect_to "/"
       end
     end
