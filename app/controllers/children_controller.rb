@@ -7,12 +7,8 @@ class ChildrenController < ApplicationController
       flash[:notice] = "The child and parent don't match"
       redirect_to '/'
     end
-    @bookings = Availability.all.select do |availability|
-      if availability.session_bookings.length > 0
-        availability.session_bookings.select do |booking|
-          booking.child_id == @child.id
-        end
-      end
+    if @child.session_bookings
+      @bookings = @child.session_bookings.map { |e| e.availability }
     end
   end
 
@@ -24,7 +20,6 @@ class ChildrenController < ApplicationController
   def update
     @child.update(child_params)
     if @child.valid?
-      @child.save
       flash[:notice] = "Updated successfully"
       redirect_to "/users/#{current_user.id}"
     else
@@ -59,7 +54,7 @@ class ChildrenController < ApplicationController
 
   def set_child
     children = Child.all.select do |c|
-      c.user_id == params[:user_id].to_i
+      c.user_id == current_user.id
     end
     if children.include?(Child.find(params[:id]))
       @child = Child.find(params[:id])

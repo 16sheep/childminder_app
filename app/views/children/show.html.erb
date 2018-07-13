@@ -10,7 +10,7 @@
   <%= date %>
   <% booking.each do |booking| %>
     <div>
-      <span>Booked with <%=booking.user.name%></span>
+      <%= link_to "Booked with #{booking.user.name}", user_session_bookings_path(current_user) %>
     </div>
   <% end %>
 <% end %>
