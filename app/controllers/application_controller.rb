@@ -14,14 +14,15 @@ class ApplicationController < ActionController::Base
 
     #todo: Check if the user is logged in user
     def authorize_user
-      if !user_logged_in || current_user.id != params[:user_id].to_i
+      if !user_logged_in || current_user.id != params[:id].to_i
         flash[:notice] = "You are not authorized to view this page"
         redirect_to "/"
       end
     end
 
     def authorize_user_objects
-      if !session[:user_id] || current_user.id != params[:user_id].to_i
+      if !user_logged_in || current_user.id != params[:user_id].to_i
+        flash[:notice] = "You are not authorized to view this page"
         redirect_to "/"
       end
     end

@@ -20,7 +20,8 @@
             <medium>with Child Minder:</medium><br>
             <small>
               <% if(@booking.availability.posting) %>
-                <%= @booking.availability.posting.user.name %>
+                <%= @booking.availability.posting.user.name %>:
+                <%= @booking.availability.posting.user.email %>
               <% end %>
             </small>
           </p>
@@ -31,8 +32,4 @@
         </div>
     </div>
   </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 4263802a8d4fb1ff3f7754e3e74f7de13b06f04c
 </div>

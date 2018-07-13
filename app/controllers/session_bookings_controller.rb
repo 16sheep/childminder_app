@@ -1,8 +1,8 @@
 class SessionBookingsController < ApplicationController
 
   before_action :set_booking, only: [:show, :destroy, :edit, :update]
-  before_action :authorize_user_objects, only:[:index, :show, :new, :create, :destroy]
   before_action :require_login, only: [:index, :show, :new, :create, :destroy]
+  before_action :authorize_user_objects, only:[:index, :show, :new, :create, :destroy]
 
   def index
     @bookings = SessionBooking.all.select do |session_booking|
@@ -33,15 +33,12 @@ class SessionBookingsController < ApplicationController
             availability.update(number_of_children: max_num_children)
             booking.save
           end
-<<<<<<< HEAD
-=======
-
->>>>>>> 4263802a8d4fb1ff3f7754e3e74f7de13b06f04c
         end
       end
+      flash[:notice] = "#{SessionBooking.last.child.name} has been booked with #{SessionBooking.last.availability.user.name} on #{SessionBooking.last.availability.time_from.strftime("%A, %d %B")}"
       redirect_to user_session_bookings_path
     else
-      flash[:notices] = "There is not enough spaces"
+      flash[:notice] = "There is not enough spaces"
       redirect_to user_availability_path(availability.user.id, availability.id)
     end
   end
@@ -51,6 +48,7 @@ class SessionBookingsController < ApplicationController
     num_children = a.number_of_children
     a.update(:number_of_children => num_children + 1)
     @booking.destroy
+    flash[:notice] = "Booking cancelled"
     redirect_to user_session_bookings_path
   end
 

@@ -1,12 +1,19 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :show, :destroy, :update]
   before_action :require_login, only: [:show, :edit, :update, :delete]
-
+  before_action :authorize_user, only:[:show, :edit, :update, :delete]
   def show
     @children = @user.children
   end
 
   def edit
+  end
+
+  def data
+    @children = Child.all
+    @users = User.all
+    @bookings = SessionBooking.all
+   "/data"
   end
 
   def new

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   get '/search', to: 'sessions#search', as: 'search'
 
+  get '/data', to: 'users#data', as:'data'
+
   resources :users do
     resources :children
     resources :availabilities
