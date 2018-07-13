@@ -1,10 +1,37 @@
-<%= form_for [current_user, @child] do |f| %>
-  <%=f.label :name %>
-  <%=f.text_field :name %>
-  <%=f.label :age %>
-  <%=f.number_field :age %>
-  <%=f.label "School" %>
-  <%= f.collection_select :school_id, School.all, :id, :name %>
-  <%=f.submit %>
-<% end %>
-<%= link_to "Cancel", "/users/#{current_user.id}" %>
+<div class="container text-center">
+
+  <div class="card text-center">
+  <div class="card-header">
+    Enter Child Information
+  </div>
+  <div class="card-body ">
+    <h5 class="card-title"></h5>
+    <p class="card-text">
+        <%= form_for [current_user, @child] do |f| %>
+    </p>
+    <div class="col-sm-4 mx-auto">
+    <div class="form-group">
+      <%=f.label :name %>
+      <%=f.text_field :name, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%=f.label :age %>
+      <%=f.number_field :age, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%=f.label "School"%>
+      <%= f.collection_select :school_id, School.all, :id, :name, class:"form-control" %>
+    </div>
+      <%=f.submit class:"btn btn-primary"%>
+      <%= link_to "Cancel", "/users/#{current_user.id}", class:"btn btn-primary" %>
+          </div>
+    <% end %>
+  </div>
+  <div class="card-footer text-muted">
+
+  </div>
+</div>
+
+
+
+</div>

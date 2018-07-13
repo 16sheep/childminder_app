@@ -5,46 +5,39 @@
         <div class="card-header">
           New Childminder Session
         </div>
-        <div class="card-body">
+        <div class="card-body text-center>
           <p class="card-text">
           <%=form_for [:user, @availability] do |f| %>
-          <div class="col-sm">
-              <medium>Date:</medium> <br>
+          <div class="form-group">
+            <%= f.label "Date:" %>
               <%= date_select("date", "preferred_date", order: [:day, :month, :year], :discard_year => true, :default => Date.today) %>
           </div>
-          <div class="col-sm">
-            <medium>Session Time From:</medium> <br>
+          <div class="form-group">
+            <%= f.label "Session Time From:" %>
             <%= f.time_field :time_from %>
           </div>
 
-          <div class="col-sm">
-          <medium> Session Time To:  </medium> <br>
+          <div class="form-group">
+          <%= f.label "Session Time To:" %>
           <%= f.time_field :time_until %>
           </div>
 
-          <div class="col-sm">
-            <medium> Max Slots Available: </medium> <br>
+          <div class="form-group">
+            <%= f.label "Max Slots Available:" %>
             <%= f.number_field :number_of_children %>
           </div>
 
-          <div class="col-sm">
-            <medium> Max Slots Available: </medium> <br>
+          <div class="form-group">
+            <%= f.label "Max Slots Available:" %>
             <%= f.collection_select :school_id, School.all, :id, :name %>
           </div>
           </p>
-        </div>
-        <span class="">
+          <span>
           <%= f.submit class:"btn btn-primary"  %>
         </span>
-        <br>
-          <span class="">
-        <button class="btn btn-primary" href="/users/#{session[:user_id]}" method="post" type="button" name="button">Cancel</button>
-      </span>
+        </div>
       <% end %>
       <p class="card-text">
-        <small class="text-muted">Slots Available:
-          <span></span>
-        </small>
       </p>
     </div>
   </div>
